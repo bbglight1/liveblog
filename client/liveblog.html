@@ -1,12 +1,29 @@
 <head>
+  <meta charset="utf-8" />
   <title>关于Tyr的一切</title>
 </head>
 
 <body>
-<div id="id-topics">
-  {{>topics}}
-</div>
+  <div id="id-topics">
+    {{>topics}}
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span9" style="">
+        {{>articles}}
+      </div>
+      <div class="span3">
+        {{>sidebar}}
+      </div>
+    </div>
 
+    <hr>
+
+    <footer>
+      <p>© Company 2012</p>
+    </footer>
+
+  </div>
 </body>
 
 <template name="topics">
@@ -24,9 +41,9 @@
             {{> loginButtons}}
           </div>
           <ul class="nav">
-            <li class="active"><a href="#">首页</a></li>
+            <li class="active"><a href="#" class="topic">首页</a></li>
             {{#each topics}}
-            <li class="active"><a href="/{{name}}">{{name}}</a></li>
+            <li class="active"><a href="/{{name}}" class="topic">{{name}} <small>({{articles}})</small></a></li>
             {{/each}}
           </ul>
         </div><!--/.nav-collapse -->
@@ -35,7 +52,139 @@
   </div>
 </template>
 
+<template name="sidebar">
+
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">Sidebar</li>
+      <li class="active"><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li class="nav-header">Sidebar</li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li class="nav-header">Sidebar</li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+    </ul>
+  </div><!--/.well -->
+</template>
+
+<template name="articles">
+  {{#if display_mode}}
+  <div id="articles-view">
+    <ul id="article-list">
+      {{#each articles}}
+      {{> article}}
+      {{/each}}
+    </ul>
+  </div>
+  {{else}}
+  {{>article_edit}}
+  {{/if}}
+</template>
+
+<template name="article_edit">
+  <div id="article-edit" class="article">
+    <form class="form-horizontal">
+      <legend>{{caption}}</legend>
+      <div class="control-group">
+        <label class="control-label" for="article-title">标题</label>
+        <div class="controls">
+        <input type="text" placeholder="输入文章标题" id="article-title" name="title" value="{{article.title}}" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="article-slug">SLUG</label>
+        <div class="controls">
+          <input type="text" placeholder="输入文章SLUG" id="article-slug" name="slug" value="{{article.slug}}" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label checkbox" for="article-published">发表</label>
+        <div class="controls">
+          <input type="checkbox" id="article-published" name="published" value="{{article.published}}" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="article-content">内容</label>
+        <div class="controls">
+          <div id="article-content"></div>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-primary">保存</button>
+          <button type="button" class="btn">取消</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+
+<template name="article">
+  <h1>{{title}}</h1>
+  <p>
+    <span>{{formatted_date}}</span>
+    <span>|</span>
+    <span>{{topic}}</span>
+  </p>
+  <div class="tags">
+    <ul>
+      {{#each tags}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="content">
+    {{content}}
+  </div>
+</template>
+
 <!--
+<template name="articles">
+  <div class="hero-unit">
+    <h1>Hello, world!</h1>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    <p><a class="btn btn-primary btn-large">Learn more »</a></p>
+  </div>
+  <div class="thumbnail">
+    <div class="caption">
+
+      <h3><a href="http://www.girlgonegeekblog.com/2012/08/etsy-crush-of-the-week-treno-nights/" title="Permalink to Etsy Crush of the Week- Treno Nights" rel="bookmark">Etsy Crush of the Week- Treno Nights</a></h3>
+
+      <div class="entry-meta-top">
+        <span class="entry-date">Wed, 29 Aug 2012</span>
+        <span class="entry-meta-sep">|</span>
+        <span class="entry-comm">Published in <a href="http://www.girlgonegeekblog.com/category/anime/" title="View all posts in Anime" rel="category tag">Anime</a>, <a href="http://www.girlgonegeekblog.com/category/weeklys/etsy-shop-of-the-week/" title="View all posts in Etsy Shop of the Week" rel="category tag">Etsy Shop of the Week</a>, <a href="http://www.girlgonegeekblog.com/category/geek-merch/jewelry/" title="View all posts in Jewelry" rel="category tag">Jewelry</a>, <a href="http://www.girlgonegeekblog.com/category/videogames/" title="View all posts in Videogames" rel="category tag">Videogames</a></span>
+      </div>
+
+    </div>
+
+
+    <p>
+      Rachael is a gamer girl with a knack for creating darling hand-made jewelry. Whether you’re a Whovian, gamer or otaku, there’s a little bit of everything in Treno Nights for you! Find out more about the talent behind the charming Etsy shop in my interview with Rachael. The coupon code for 15% off GEEKGIRL15 Interview with Rachael of Treno Nights Etsy Shop: Can you tell us a little about yourself?  Rachael: My name is Rachael, and I [...]
+    </p>
+
+
+    <div class="entry-meta">
+      <span class="entry-comm"><a href="http://www.girlgonegeekblog.com/2012/08/etsy-crush-of-the-week-treno-nights/#comments" title="Comment on Etsy Crush of the Week- Treno Nights">3 Comments</a></span>
+      <span class="entry-meta-sep">|</span>
+      <span class="entry-more"><a href="http://www.girlgonegeekblog.com/2012/08/etsy-crush-of-the-week-treno-nights/" title="Continue reading Etsy Crush of the Week- Treno Nights">Read More »</a></span>
+    </div>
+  </div>
+</template>
+
 <template name="lists">
   <h3>Todo Lists</h3>
   <div id="lists">

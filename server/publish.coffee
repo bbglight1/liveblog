@@ -4,6 +4,7 @@ article =
   id: uuid
   author: 'Tyr Chen'
   title: 'this is my first article'
+  slug: 'this-is-my-first-article'
   content: 'lots of html tags'
   created_at: new Date()
   published: false

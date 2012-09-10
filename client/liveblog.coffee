@@ -49,6 +49,9 @@ Template.article_edit.caption = ->
   article = Current.get_article()
   if article then "编辑#{article}" else '创建新文章'
 
+Template.article_edit.topics = ->
+  Topics.find {}, sort: 'articles': -1
+
 Template.article_edit.events =
   'blur input[type="text"], blue textarea': (e) ->
     console.log 'Put warning here'

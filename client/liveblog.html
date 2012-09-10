@@ -112,8 +112,8 @@
         <label class="control-label checkbox" for="article-topic">主题</label>
         <div class="controls">
           <select name="topic" id="article-topic">
-            {{#each articles}}
-            <option>{{name}}</option>
+            {{#each topics}}
+            <option selected="">{{name}}</option>
             {{/each}}
           </select>
         </div>

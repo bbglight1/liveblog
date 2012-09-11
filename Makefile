@@ -17,6 +17,6 @@ deploy: bundle
 	@mv $(TARGET).tgz $(DEPLOYMENT)
 	@cd $(DEPLOYMENT); \
 	tar zxvf $(TARGET).tgz; \
-	mv bundle livelog
-	@sudo supervisorctl restart liveblog
+	mv bundle $(TARGET)
+	#@sudo supervisorctl restart liveblog
 	@echo ${DONE}
